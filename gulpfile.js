@@ -13,7 +13,7 @@ gulp.task("clean", function(){
 });
 
 gulp.task('jsBrowserify', function(){
-  return browserify({ entries: ['./js/main-front.js'] })
+  return browserify({ entries: ['./js/main-interface.js'] })
     .bundle()
     .pipe(source('app.js'))
     .pipe(gulp.dest('./build/js'));
