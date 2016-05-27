@@ -4,19 +4,23 @@ exports.apiKey = '341b261aaccd1b4e3a753066d9c93e58fddafcfb';
 },{}],2:[function(require,module,exports){
 var apiUser = require('./../js/main.js').apiUser;
 var apiRepo = require('./../js/main.js').apiRepo;
+var showRepos = require('./../js/main.js').showRepos;
 
 $(document).ready(function() {
 	$('#search').submit(function(event){
     event.preventDefault();
-		$("#info").empty();
-		$("#userprofile").empty();
-		$("#begin").empty();
+		$("#user").empty();
+		$("#repos").empty();
 
 		var username = $('#user_name').val();
 		$('#user_name').val('');
 		apiUser(username);
 		apiRepo(username);
+    debugger;
+    setTimeout(showRepos, 1000);
 	});
+
+
 });
 
 },{"./../js/main.js":3}],3:[function(require,module,exports){
@@ -38,27 +42,33 @@ var repos = {
   deepInfo: []
 };
 
+exports.showRepos = function(){
+  for (var a=0; a<=11; a++) {
+    $('#repos').append(
+      '<h3>Repository Name: ' + repos.name[a] + '</h3>' +
+      '<p>Repository URL: ' + repos.url[a] + '</p>' +
+      '<p>Github URL: ' + repos.language[a] + '</p>' +
+      '<p>Watcher Count: ' + repos.watcherCount[a] + '</p>' +
+      '<p>Follower Count: ' + repos.deepInfo[a] + '</p>' + '<br>'
+    );
+  }
+}
+
 exports.apiRepo = function(username){
-  $.get('https://api.github.com/users/' + username + '/repos?access_token=' + apiKey + '&page=2&per_page=10&affiliation=owner&sort=created&direction=desc').then(function(response){
+  $.get('https://api.github.com/users/' + username + '/repos?access_token=' + apiKey + '&page=2&per_page=12&affiliation=owner&sort=created&direction=desc').then(function(response){
     // console.log(response);
     response.forEach(function(repository){
       reObj.push(repository);
     });
-    console.log("reObj");
-    console.log(reObj[0].name);
-    console.log(reObj[0].clone_url);
-    console.log(reObj[0].language);
-    console.log(reObj[0].watchers_count);
-    console.log(reObj[0].url);
-    for(var i=0; i<=9; i++){
+    for(var i=0; i<=11; i++){
       (repos.name).push(reObj[i].name);
       (repos.url).push(reObj[i].clone_url);
       (repos.language).push(reObj[i].language);
       (repos.watcherCount).push(reObj[i].watchers_count);
       (repos.deepInfo).push(reObj[i].url);
     }
-    console.log("repos");
     console.log(repos);
+
   }).fail(function(error){
     console.log(error.responseJSON.message);
   });
@@ -69,7 +79,6 @@ exports.apiUser = function(username){
 
 	$.get('https://api.github.com/users/' + username + '?access_token=' + apiKey)
 	.then(function(response){
-    console.log(response);
 		$('#user').append(
         '<img class="avatar" src=' + response.avatar_url + '>' +
         '<h2>User Name: ' + username + '</h2>' +
@@ -77,6 +86,7 @@ exports.apiUser = function(username){
         '<h3>Github URL: ' + response.html_url + '</h3>' +
         '<h3>Repo Count: ' + response.public_repos + '</h3>' +
         '<h3>Follower Count: ' + response.followers + '</h3>'
+
 		);
 	}).fail(function(error){
     console.log(error.responseJSON.message);
