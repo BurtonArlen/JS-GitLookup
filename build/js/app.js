@@ -1,16 +1,29 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
-var Main = require('./../js/main.js').Main;
+exports.apiKey = '341b261aaccd1b4e3a753066d9c93e58fddafcfb';
 
+},{}],2:[function(require,module,exports){
+var apiUser = require('./../js/main.js').apiUser;
+var apiRepo = require('./../js/main.js').apiRepo;
 
-$(document).ready(function(){
-  
+$(document).ready(function() {
+	$('#search').submit(function(event){
+    event.preventDefault();
+		$("#info").empty();
+		$("#userprofile").empty();
+		$("#begin").empty();
+
+		var username = $('#user_name').val();
+		$('#user_name').val('');
+		apiUser(username);
+		apiRepo(username);
+	});
 });
 
-},{"./../js/main.js":2}],2:[function(require,module,exports){
-var username;
-var apiKey;
+},{"./../js/main.js":3}],3:[function(require,module,exports){
+var apiKey = require('./../.env').apiKey;
+var repoArray =[];
 
-exports.getRepos = function(){
+exports.apiRepo = function(username){
   $.get('https://api.github.com/users/'+ username +'?access_token=' + apiKey).then(function(response){
     console.log(response);
   }).fail(function(error){
@@ -18,4 +31,25 @@ exports.getRepos = function(){
   });
 };
 
-},{}]},{},[1]);
+
+exports.apiUser = function(username){
+
+	$.get('https://api.github.com/users/' + username + '?access_token=' + apiKey)
+	.then(function(response){
+		$('#user').append(
+        '<img  src=' + response.avatar_url + '>' +
+        '<h2>Name: ' + response.name + '</h2>' +
+        '<h3>Email: ' + response.email + '</h3>' +
+        '<p>Repo Count: ' + response.public_repos + '</p>' +
+        '<p>Follower Count: ' + response.followers + '</p>'
+		);
+	}).fail(function(error){
+    console.log(error.responseJSON.message);
+  });
+};
+
+
+// module.exports.apiUser = apiUser;
+// module.exports.apiRepo = apiRepo;
+
+},{"./../.env":1}]},{},[2]);
