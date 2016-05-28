@@ -16,7 +16,7 @@ exports.showRepos = function(){
         '<h3>Repository Name: ' + repos.name[a] + '</h3>' +
         '<p><a href="'+repos.url[a]+'">Repository URL: ' + repos.url[a] + '</a></p>' +
         '<p><a href="'+repos.deepInfo[a]+'">Detailed info: ' + repos.deepInfo[a] + '</a></p>' +
-        '<p>Github URL: ' + repos.language[a] + '</p>' +
+        '<p>Language Used: ' + repos.language[a] + '</p>' +
         '<p>Watcher Count: ' + repos.watcherCount[a] + '</p>' +
       '</div>' +
       '<br>'

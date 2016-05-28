@@ -78,7 +78,7 @@ gulp.task('bowerCSS', function () {
 });
 
 gulp.task('bowerFont', function () {
-  return gulp.src(lib.ext(['eot', 'ttf', 'svg', 'woff', 'woff2']).files)
+  return gulp.src(lib.ext(['otf' ,'eot', 'ttf', 'svg', 'woff', 'woff2']).files)
     .pipe(gulp.dest('./build/fonts'));
 });
 

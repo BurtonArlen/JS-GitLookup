@@ -10,10 +10,12 @@ A website where a user can search github for a user using their api, version 0.0
 
 ## Requirements
 
-Install Node Package Manager
-Install Bower
-Install Ruby
-Run 'npm install', 'bower install', 'gulp build', and 'gulp serve' to show the page
+!!move fonts from ./fonts to ./build/fonts post "$gulp build"!!
+
+Install Node Package Manager.
+Install Bower.
+Install Ruby.
+Run 'npm install', 'bower install', 'gulp build', and 'gulp serve' to show the page.
 
 ## Known Bugs
 
