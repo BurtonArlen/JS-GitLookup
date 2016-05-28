@@ -12,7 +12,6 @@ $(document).ready(function() {
 		$('#user_name').val('');
 		apiUser(username);
 		apiRepo(username);
-    debugger;
     setTimeout(showRepos, 1000);
 	});
 

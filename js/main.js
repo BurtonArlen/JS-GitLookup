@@ -1,12 +1,5 @@
 var apiKey = require('./../.env').apiKey;
 
-function Repo(name, url, language, watcherCount, deepInfo) {
-  this.name = name;
-  this.url = url;
-  this.language = language;
-  this.watcherCount = watcherCount;
-  this.deepInfo = deepInfo;
-}
 var reObj = [];
 var repos = {
   name: [],
@@ -17,24 +10,31 @@ var repos = {
 };
 
 exports.showRepos = function(){
-  for (var a=0; a<=11; a++) {
+  for (var a=0; a<=4; a++) {
     $('#repos').append(
-      '<h3>Repository Name: ' + repos.name[a] + '</h3>' +
-      '<p>Repository URL: ' + repos.url[a] + '</p>' +
-      '<p>Github URL: ' + repos.language[a] + '</p>' +
-      '<p>Watcher Count: ' + repos.watcherCount[a] + '</p>' +
-      '<p>Follower Count: ' + repos.deepInfo[a] + '</p>' + '<br>'
+      '<div class="repository">' +
+        '<h3>Repository Name: ' + repos.name[a] + '</h3>' +
+        '<p><a href="'+repos.url[a]+'">Repository URL: ' + repos.url[a] + '</a></p>' +
+        '<p><a href="'+repos.deepInfo[a]+'">Detailed info: ' + repos.deepInfo[a] + '</a></p>' +
+        '<p>Github URL: ' + repos.language[a] + '</p>' +
+        '<p>Watcher Count: ' + repos.watcherCount[a] + '</p>' +
+      '</div>' +
+      '<br>'
     );
+    if(a == 4){
+      repos = {name:[], url:[], language:[], watcherCount:[], deepInfo:[]};
+      reObj = [];
+    }
   }
 }
 
 exports.apiRepo = function(username){
-  $.get('https://api.github.com/users/' + username + '/repos?access_token=' + apiKey + '&page=2&per_page=12&affiliation=owner&sort=created&direction=desc').then(function(response){
+  $.get('https://api.github.com/users/' + username + '/repos?access_token=' + apiKey + '&page=2&per_page=5&affiliation=owner&sort=created&direction=desc').then(function(response){
     // console.log(response);
     response.forEach(function(repository){
       reObj.push(repository);
     });
-    for(var i=0; i<=11; i++){
+    for(var i=0; i<=4; i++){
       (repos.name).push(reObj[i].name);
       (repos.url).push(reObj[i].clone_url);
       (repos.language).push(reObj[i].language);

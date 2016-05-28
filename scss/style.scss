@@ -1,0 +1,74 @@
+.jumbotron{
+  text-align: center;
+  border-width: 15px;
+  border-color: #2f3032;
+  border-style:double;
+}
+
+body{
+  background-color: #2f3032;
+}
+
+button{
+  border-radius: 5px;
+  background-color: #4d1b7b;
+  color: #eee;
+}
+
+button:hover{
+  border-radius: 5px;
+  background-color: #673888;
+  color: #31a9e1;
+}
+
+input{
+  padding-top: -6px;
+  height: 30px;
+  width: 300px;
+}
+
+img{
+  float: left;
+  margin: 15px;
+  margin-top: -50px;
+  border-radius: 25px;
+  height: auto;
+  width: 300px;
+
+}
+
+.user{
+  margin-top: 65px;
+  color: #eee;
+}
+
+.repos{
+  margin-left: auto;
+  margin-right: auto;
+  width: 70%;
+  text-align: center;
+}
+
+.repository{
+  font-size: 110%;
+  font-weight: bold;
+  background-color: #eee;
+  border-radius: 30px;
+}
+
+h3{
+  font-style: italic;
+  font-weight: bolder;
+}
+
+h2{
+  font-weight: bolder;
+}
+
+a{
+  color: #2f3032;
+}
+
+a:hover{
+  color: #4d1b7b;
+}
