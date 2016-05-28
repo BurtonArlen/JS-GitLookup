@@ -8,6 +8,13 @@
 
 A website where a user can search github for a user using their api, version 0.0.1, current as of 5.27.2016.
 
+## Requirements
+
+Install Node Package Manager
+Install Bower
+Install Ruby
+Run 'npm install', 'bower install', 'gulp build', and 'gulp serve' to show the page
+
 ## Known Bugs
 
 _{version is pre alpha}_
